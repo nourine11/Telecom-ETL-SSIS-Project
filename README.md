@@ -112,7 +112,7 @@ Included as part of the SSIS project structure.
 
 # 🔄 ETL Pipeline Details
 
-# 1. 📥 Source Extraction
+## 1. 📥 Source Extraction
 The pipeline reads telecom transaction data from a delimited CSV file.
 The source contains fields such as:
 
@@ -126,7 +126,7 @@ event_ts
 
 The source file is configured as a flat-file connection and uses a delimiter-based structure.
 
-# 2. 🧹 Data Cleaning:
+## 2. 🧹 Data Cleaning:
 The package contains a dedicated transformation:
 DEV - Replace Blank with Null
 This step handles missing or blank values before loading them into the database.
@@ -140,11 +140,11 @@ Blank event_type → NULL
 Missing event_ts → NULL
 This improves data quality and prevents invalid placeholder values from being inserted into the target tables.
 
-# 3. 🔄 Data Conversion
+## 3. 🔄 Data Conversion
 The Data Conversion transformation prepares incoming fields for the data types expected by SQL Server.
 This creates a consistent schema between the raw CSV source and the database destination.
 
-# 4. 🔎 Subscriber Lookup
+## 4. 🔎 Subscriber Lookup
 The package uses a Lookup Transformation named:
 LKP Subscriber ID
 The lookup uses the reference table:
@@ -157,7 +157,7 @@ subscriber_id
 This enriches the raw telecom transaction with the corresponding subscriber identifier.
 If no subscriber is found, the flow handles the missing match using a default value rather than allowing the record to silently disappear.
 
-# 5. 🧩 TAC & SNR Calculation
+## 5. 🧩 TAC & SNR Calculation
 The transformation:
 DRV calculate Snr , Tac
 derives additional information from the IMEI.
@@ -168,7 +168,7 @@ Invalid or missing IMEI values are handled using a fallback value:
 -99999
 This allows the pipeline to continue processing while preserving information about invalid source values.
 
-# 6. 📝 Audit ID
+## 6. 📝 Audit ID
 ## The transformation:
 DRV audit
 adds the current audit identifier to each transaction.
@@ -296,21 +296,21 @@ SQL Server Integration Services (SSIS)
 Visual Studio
 SQL Server Data Tools (SSDT) / SSIS extension for your Visual Studio version
 
-# 1. Clone the Repository
+## 1. Clone the Repository
 git clone <YOUR-REPOSITORY-URL>
 cd <YOUR-REPOSITORY-NAME>
 
-# 2. Open the SSIS Project
+## 2. Open the SSIS Project
 ## Open:
 Telecom project 3.dtproj
 using Visual Studio with SSIS support installed.
 
-# 3. Configure the SQL Server Connection
+## 3. Configure the SQL Server Connection
 The project is configured to connect to a SQL Server database named:
 EO_Telecom_GrgEdu
 Update the connection manager if your SQL Server instance or database name is different.
 
-# 4. Configure the Source File Path
+## 4. Configure the Source File Path
 The flat-file connection is configured using a local Windows path.
 You should update it to the location of your own source CSV files before execution.
 
@@ -319,13 +319,13 @@ C:\YourProject\source_files\batch 0\02_clean_data_with_null.csv
 
 # ⚠️ Important: Do not commit private/local machine paths or sensitive connection information to a public repository.
 
-# 5. Build the Project
+## 5. Build the Project
 
 Build the SSIS project from Visual Studio:
 Build → Build Solution
 The project can generate an .ispac deployment package under the build output directory.
 
-# 6. Execute the Package
+## 6. Execute the Package
 
 ## Run:
 load _data.dtsx
@@ -402,6 +402,9 @@ Redirecting failed records instead of losing them.
 ![Data-Flow](data-flow.png)
 
 ## 🗄️ Database & Audit
+![Database](Database.png)
+
+## 🗄️ Database execution
 ![Database](Database.png)
 
 # 🔮 Possible Future Improvements
