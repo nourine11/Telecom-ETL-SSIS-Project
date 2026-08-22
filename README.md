@@ -405,7 +405,7 @@ Redirecting failed records instead of losing them.
 ![Database](Database.png)
 
 ## 🗄️ Database execution
-![Database](Database.png)
+![tables](tables.png)
 
 # 🔮 Possible Future Improvements
 ##The project can be extended with:
