@@ -1,4 +1,4 @@
-#📡 Telecom ETL Data Integration Project
+# 📡 Telecom ETL Data Integration Project
 An end-to-end ETL pipeline built with SQL Server Integration Services (SSIS) to ingest telecom transaction data from CSV files, clean and enrich the data, load it into a relational database, and maintain audit/error tracking.
 
 # 📌 Project Overview:
@@ -37,7 +37,7 @@ Audit Update
    ▼
 Archive / Move Processed Files
 
-#🎯 Project Objectives:
+# 🎯 Project Objectives:
 The project focuses on building a reliable ETL process capable of:
 📥 Reading telecom transaction data from CSV files.
 🧹 Cleaning and standardizing incoming data.
@@ -50,7 +50,7 @@ The project focuses on building a reliable ETL process capable of:
 📝 Maintaining batch-level and file-level audit information.
 📦 Moving/copying processed source files as part of the ETL workflow.
 
-#🛠️ Technologies Used:
+# 🛠️ Technologies Used:
 Technology
 Purpose
 SQL Server Integration Services (SSIS)
@@ -66,7 +66,7 @@ Database connectivity
 SSIS Data Flow
 Data transformation and loading
 
-#🗂️ Project Structure
+# 🗂️ Project Structure
 
 Telecom project 3/
 │
@@ -92,7 +92,7 @@ Main SSIS Packages
 load _data.dtsx
 The main ETL package.
 
-##It contains:
+## It contains:
 SQL batch ID generation
 Foreach Loop Container
 File copy/move operations
@@ -103,16 +103,16 @@ Error handling
 Row counting
 load _data 1.dtsx
 
-##A simplified data-flow package containing:
+## A simplified data-flow package containing:
 Flat File Source
 Derived Column transformation
 Multicast
 load_data2.dtsx
 Included as part of the SSIS project structure.
 
-#🔄 ETL Pipeline Details
+# 🔄 ETL Pipeline Details
 
-#1. 📥 Source Extraction
+# 1. 📥 Source Extraction
 The pipeline reads telecom transaction data from a delimited CSV file.
 The source contains fields such as:
 
@@ -126,7 +126,7 @@ event_ts
 
 The source file is configured as a flat-file connection and uses a delimiter-based structure.
 
-#2. 🧹 Data Cleaning:
+# 2. 🧹 Data Cleaning:
 The package contains a dedicated transformation:
 DEV - Replace Blank with Null
 This step handles missing or blank values before loading them into the database.
@@ -140,24 +140,24 @@ Blank event_type → NULL
 Missing event_ts → NULL
 This improves data quality and prevents invalid placeholder values from being inserted into the target tables.
 
-#3. 🔄 Data Conversion
+# 3. 🔄 Data Conversion
 The Data Conversion transformation prepares incoming fields for the data types expected by SQL Server.
 This creates a consistent schema between the raw CSV source and the database destination.
 
-#4. 🔎 Subscriber Lookup
+# 4. 🔎 Subscriber Lookup
 The package uses a Lookup Transformation named:
 LKP Subscriber ID
 The lookup uses the reference table:
 dbo.dim_imsi_reference
 
-##The matching key is:
+## The matching key is:
 imsi
 The lookup retrieves:
 subscriber_id
 This enriches the raw telecom transaction with the corresponding subscriber identifier.
 If no subscriber is found, the flow handles the missing match using a default value rather than allowing the record to silently disappear.
 
-#5. 🧩 TAC & SNR Calculation
+# 5. 🧩 TAC & SNR Calculation
 The transformation:
 DRV calculate Snr , Tac
 derives additional information from the IMEI.
@@ -168,13 +168,13 @@ Invalid or missing IMEI values are handled using a fallback value:
 -99999
 This allows the pipeline to continue processing while preserving information about invalid source values.
 
-#6. 📝 Audit ID
-##The transformation:
+# 6. 📝 Audit ID
+## The transformation:
 DRV audit
 adds the current audit identifier to each transaction.
 The audit ID connects the processed transaction records with their corresponding ETL execution record in the audit table.
 
-#🗄️ Target Tables:
+# 🗄️ Target Tables:
 The project loads data into SQL Server objects including:
 dbo.fact_transaction
 The main destination for successfully processed telecom transactions.
@@ -196,7 +196,7 @@ dbo.err_destination_output
 Stores records rejected by the destination load.
 This provides a dedicated location for investigating data-quality or database-loading issues.
 
-##📊 Audit & Monitoring
+## 📊 Audit & Monitoring
 One of the important features of this project is its ETL auditing mechanism.
 Before processing the files, the package generates a batch ID using:
 SELECT MAX(batch_id) + 1 AS batch_id
@@ -211,7 +211,7 @@ Destination Errors
 
 At the end of processing, the audit record is updated with the final results.
 
-##Conceptually:
+## Conceptually:
 
 Batch
   │
@@ -229,7 +229,7 @@ Batch
 
 This makes the ETL process easier to monitor and troubleshoot.
 
-#⚠️ Error Handling:
+# ⚠️ Error Handling:
 The pipeline implements error outputs for failed records.
 Records that cannot be successfully inserted into the target database can be redirected to:
 dbo.err_destination_output
@@ -242,12 +242,12 @@ Destination errors
 
 Instead of stopping the entire pipeline because of individual bad records, the workflow can preserve the problematic data for later investigation.
 
-#🔁 File Processing Workflow
+# 🔁 File Processing Workflow
 The main package uses a:
 Foreach Loop Container
 to process files dynamically.
 
-##The workflow includes:
+## The workflow includes:
 
 Get File
    ↓
@@ -267,7 +267,7 @@ Move / Copy Processed File
 
 This design makes the package suitable for processing multiple files in a batch.
 
-#📐 Data Flow Components:
+# 📐 Data Flow Components:
 The main Data Flow contains several SSIS transformations and components:
 Flat File Source
 Data Conversion
@@ -278,7 +278,7 @@ Row Count
 OLE DB Destination
 Error Outputs
 
-##Important transformations include:
+## Important transformations include:
 Data Conversion
 DER Get Subscriber id
 Derived Column 1
@@ -287,7 +287,7 @@ DRV audit
 DRV calculate Snr , Tac
 LKP Subscriber ID
 
-#🚀 How to Run the Project
+# 🚀 How to Run the Project
 
 Prerequisites
 Make sure the following are installed:
@@ -296,38 +296,38 @@ SQL Server Integration Services (SSIS)
 Visual Studio
 SQL Server Data Tools (SSDT) / SSIS extension for your Visual Studio version
 
-#1. Clone the Repository
+# 1. Clone the Repository
 git clone <YOUR-REPOSITORY-URL>
 cd <YOUR-REPOSITORY-NAME>
 
-#2. Open the SSIS Project
-##Open:
+# 2. Open the SSIS Project
+## Open:
 Telecom project 3.dtproj
 using Visual Studio with SSIS support installed.
 
-#3. Configure the SQL Server Connection
+# 3. Configure the SQL Server Connection
 The project is configured to connect to a SQL Server database named:
 EO_Telecom_GrgEdu
 Update the connection manager if your SQL Server instance or database name is different.
 
-#4. Configure the Source File Path
+# 4. Configure the Source File Path
 The flat-file connection is configured using a local Windows path.
 You should update it to the location of your own source CSV files before execution.
 
-##For example:
+## For example:
 C:\YourProject\source_files\batch 0\02_clean_data_with_null.csv
 
-#⚠️ Important: Do not commit private/local machine paths or sensitive connection information to a public repository.
+# ⚠️ Important: Do not commit private/local machine paths or sensitive connection information to a public repository.
 
-#5. Build the Project
+# 5. Build the Project
 
 Build the SSIS project from Visual Studio:
 Build → Build Solution
 The project can generate an .ispac deployment package under the build output directory.
 
-#6. Execute the Package
+# 6. Execute the Package
 
-##Run:
+## Run:
 load _data.dtsx
 The main package will:
 Generate a batch ID.
@@ -342,14 +342,14 @@ Capture rejected records.
 Update audit information.
 Process the source files.
 
-#📈 Key ETL Design Concepts Demonstrated
+# 📈 Key ETL Design Concepts Demonstrated
 
-##This project demonstrates practical Data Engineering concepts including:
+## This project demonstrates practical Data Engineering concepts including:
 ETL
 Extract → Transform → Load
 Data Quality
 
-##Handling:
+## Handling:
 NULL values
 Blank fields
 Invalid values
@@ -360,7 +360,7 @@ Using lookup operations to transform:
 IMSI → Subscriber ID
 Data Warehousing
 
-##Separating:
+## Separating:
 Fact data
 Reference/dimension data
 Audit data
@@ -369,7 +369,7 @@ Batch Processing
 Processing multiple input files through a Foreach Loop Container.
 ETL Auditing
 
-##Tracking:
+## Tracking:
 Batch ID
 File Name
 Rows Extracted
@@ -377,10 +377,10 @@ Rows Inserted
 Rows Rejected
 Processing Status
 
-##Error Management:
+## Error Management:
 Redirecting failed records instead of losing them.
 
-#💡 Project Highlights:
+# 💡 Project Highlights:
 ⭐ Batch-based telecom ETL pipeline
 ⭐ Automated file processing
 ⭐ Data cleaning and type conversion
@@ -404,7 +404,7 @@ Redirecting failed records instead of losing them.
 ## 🗄️ Database & Audit
 ![Database](Database.png)
 
-#🔮 Possible Future Improvements
+# 🔮 Possible Future Improvements
 ##The project can be extended with:
 Parameterized connection managers
 Environment variables for Dev/Test/Production
@@ -418,11 +418,11 @@ Duplicate detection
 Data-quality dashboards
 Power BI reporting on audit and transaction data
 
-##👩‍💻 Project Type:
+## 👩‍💻 Project Type:
 Data Engineering / ETL / Data Integration Project
 Built as a practical SQL Server Integration Services (SSIS) project for processing and loading telecom transaction data.
 
-##📄 License
+## 📄 License
 This project is intended for educational and portfolio purposes.
 
 ⭐ If you found this project useful
