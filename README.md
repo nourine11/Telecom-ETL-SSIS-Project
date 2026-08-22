@@ -402,7 +402,7 @@ Redirecting failed records instead of losing them.
 ![Data-Flow](data-flow.png)
 
 ## 🗄️ Database & Audit
-![Database](database.png)
+![Database](Database.png)
 
 #🔮 Possible Future Improvements
 ##The project can be extended with:
