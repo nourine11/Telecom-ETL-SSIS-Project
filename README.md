@@ -1,7 +1,7 @@
 #📡 Telecom ETL Data Integration Project
 An end-to-end ETL pipeline built with SQL Server Integration Services (SSIS) to ingest telecom transaction data from CSV files, clean and enrich the data, load it into a relational database, and maintain audit/error tracking.
 
-#📌 Project Overview:
+# 📌 Project Overview:
 This project implements a Telecom Data Warehouse ETL pipeline using Microsoft SQL Server Integration Services (SSIS).
 The pipeline is designed to process telecom transaction files in batch form and transform raw CSV data into structured database records.
 
