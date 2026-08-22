@@ -396,13 +396,13 @@ Redirecting failed records instead of losing them.
 # 📸 Project Screenshots
 
 ## 🔄 SSIS Control Flow
-![Control Flow](screenshots/control-flow.png)
+![Control-Flow](control-flow.png)
 
 ## 🔁 Data Flow
-![Data Flow](screenshots/data-flow.png)
+![Data-Flow](data-flow.png)
 
 ## 🗄️ Database & Audit
-![Database](screenshots/database.png)
+![Database](database.png)
 
 #🔮 Possible Future Improvements
 ##The project can be extended with:
