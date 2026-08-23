@@ -287,61 +287,6 @@ DRV audit
 DRV calculate Snr , Tac
 LKP Subscriber ID
 
-# 🚀 How to Run the Project
-
-Prerequisites
-Make sure the following are installed:
-SQL Server
-SQL Server Integration Services (SSIS)
-Visual Studio
-SQL Server Data Tools (SSDT) / SSIS extension for your Visual Studio version
-
-## 1. Clone the Repository
-git clone <YOUR-REPOSITORY-URL>
-cd <YOUR-REPOSITORY-NAME>
-
-## 2. Open the SSIS Project
-## Open:
-Telecom project 3.dtproj
-using Visual Studio with SSIS support installed.
-
-## 3. Configure the SQL Server Connection
-The project is configured to connect to a SQL Server database named:
-EO_Telecom_GrgEdu
-Update the connection manager if your SQL Server instance or database name is different.
-
-## 4. Configure the Source File Path
-The flat-file connection is configured using a local Windows path.
-You should update it to the location of your own source CSV files before execution.
-
-## For example:
-C:\YourProject\source_files\batch 0\02_clean_data_with_null.csv
-
-# ⚠️ Important: Do not commit private/local machine paths or sensitive connection information to a public repository.
-
-## 5. Build the Project
-
-Build the SSIS project from Visual Studio:
-Build → Build Solution
-The project can generate an .ispac deployment package under the build output directory.
-
-## 6. Execute the Package
-
-## Run:
-load _data.dtsx
-The main package will:
-Generate a batch ID.
-Iterate through source files.
-Create audit records.
-Extract the CSV data.
-Clean and transform the records.
-Enrich records using the subscriber lookup.
-Calculate TAC and SNR.
-Load valid transactions.
-Capture rejected records.
-Update audit information.
-Process the source files.
-
 # 📈 Key ETL Design Concepts Demonstrated
 
 ## This project demonstrates practical Data Engineering concepts including:
@@ -377,9 +322,6 @@ Rows Inserted
 Rows Rejected
 Processing Status
 
-## Error Management:
-Redirecting failed records instead of losing them.
-
 # 💡 Project Highlights:
 ⭐ Batch-based telecom ETL pipeline
 ⭐ Automated file processing
@@ -407,27 +349,6 @@ Redirecting failed records instead of losing them.
 ## 🗄️ Database execution
 ![tables2](tables2.png)
 
-# 🔮 Possible Future Improvements
-##The project can be extended with:
-Parameterized connection managers
-Environment variables for Dev/Test/Production
-Dynamic source and archive folders
-More robust batch ID generation
-Additional data-quality validation rules
-Automated email/alert notifications
-SSIS Catalog deployment
-Incremental loading
-Duplicate detection
-Data-quality dashboards
-Power BI reporting on audit and transaction data
 
-## 👩‍💻 Project Type:
-Data Engineering / ETL / Data Integration Project
-Built as a practical SQL Server Integration Services (SSIS) project for processing and loading telecom transaction data.
 
-## 📄 License
-This project is intended for educational and portfolio purposes.
 
-⭐ If you found this project useful
-
-Feel free to ⭐ the repository and explore the SSIS packages to understand the complete ETL workflow.
